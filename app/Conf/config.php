@@ -8,7 +8,7 @@ return array(
     'DB_PREFIX' => 'ts_',
 
 	//显示Trance信息
-	//'SHOW_PAGE_TRACE'=>true, 
+	'SHOW_PAGE_TRACE'=>true, 
 
 	//公共文件
 	'TMPL_PARSE_STRING'=>array(

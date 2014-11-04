@@ -1,0 +1,28 @@
+<layout name="layout" />
+<div class="nav">
+	<p>商品体系  &gt; 品牌管理   </p><span>[<a href="{:U('Brand/add')}">添加品牌</a>]</span>
+</div>
+<div class="line"></div>
+
+<div class="container" style="margin-top:30px;">
+	<table class="table table-bordered"">
+		<tr>
+			<th>名称</th>
+			<th>图标</th>
+			<th>状态</th>
+			<th>排序</th>
+			<th>备注</th>
+			<th>操作</th>
+		</tr>		
+		<volist name='list' id='vo'>
+		<tr>
+			<td>{$vo.brand_name}</td>
+			<td>{$vo.logo}</td>
+			<td>{$vo.status}</td>
+			<td>{$vo.sort}</td>
+			<td>{$vo.mark}</td>
+			<td><a href="{:U('Article/edit',array('id'=>$vo['article_id']))}">编辑</a> |　<a href="{:U('Article/addRecover',array('id'=>$vo['article_id']))}">删除</a></td>
+		</tr>
+		</volist>
+	</table>
+</div>

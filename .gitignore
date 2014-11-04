@@ -1,2 +1,5 @@
 .sass-cache
 app/Runtime
+.project
+.buildpath
+.settings
