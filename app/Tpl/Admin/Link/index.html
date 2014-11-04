@@ -1,0 +1,31 @@
+<layout name="layout" />
+<div class="nav">
+	<p>常用操作  &gt; 友情链接 </p><span>[<a href="{:U('Link/add')}">添加链接</a>]</span>
+</div>
+<div class="line"></div>
+
+<div style="margin-top:30px;">
+	<table width=90% style="margin:0 auto;" border=1 >
+		<tr>
+			<th>名称</th>
+			<th>地址</th>
+			<th>缩略图</th>
+			<th>排序</th>
+			<th>备注</th>
+			<th>添加时间</th>
+			<th>操作</th>
+		</tr>
+			
+		<volist name='list' id='vo'>
+		<tr>
+			<td>{$vo.name}</td>
+			<td>{$vo.url}</td>
+			<td align=center>{$vo.img}</td>
+			<td align=center>{$vo.sort}</td>
+			<td align=center>{$vo.mark}</td>
+			<td align=center>{$vo.addtime|date="Y-m-d",###}</td>
+			<td align=center><a hrrf="#">编辑</a> |　<a hrrf="#">删除</a></td>
+		</tr>
+		</volist>
+	</table>
+</div>

@@ -1,0 +1,8 @@
+@CHARSET "UTF-8";
+*{padding:0;margin:0;}
+body{padding:10px; font-size:12px;}
+a{text-decoration:none; color:blue;}
+.line{width:100%; clear:both; height:1px; background:#414859;}
+.nav{height:50px; line-height:50px; font-size:14px;}
+.nav p{float:left;padding:0 15px 0 5px;}
+.nav span{font-size:12px;}

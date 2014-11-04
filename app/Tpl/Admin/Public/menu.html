@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>库存管理系统</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">      
+        <script type="text/javascript" src="__PUBLIC__/admin/js/jquery-1.7.1.min.js"></script>           
+    <base target="main" />
+    <style>
+	    *{padding:0; margin:0;}
+	     body{background:#FFF;padding-top:20px;}
+	    .box{padding-left:10px;}
+	    .box .box_tit{}
+	    .box .box_tit .hopen{cursor:pointer; float: left; height: 16px; margin: 10px 5px 0 0; width: 16px; background:url("__PUBLIC__/admin/images/ico.png") no-repeat -15px 0;}
+	    .box .box_tit h2{cursor:pointer; padding:10px 0 0 0px; font-size:14px;}
+	    .box .box_list{}
+	    .box .box_list ul{height:auto;overflow:hidden;padding:5px 0;}
+	    .box .box_list ul li{ list-style:none;padding-left:20px;}
+	    .box .box_list ul li a{text-decoration:none; color:#333;font-size:12px;padding:5px;display:inline-block;}
+	    .on{color:#FFF!important; background:#333;}
+	    .cur{background:url("__PUBLIC__/admin/images/ico.png") no-repeat 0 0 !important;}
+    </style>
+    </head>
+    <body>
+        <if condition="($menuTitle eq '内容管理')">
+        <div class="box">
+            <div class="box_tit">
+                <em class="hopen"></em>
+                <h2>内容管理</h2>
+            </div>           
+            <div class="box_list">
+                <ul>
+                    <li><a href="{:U('Column/index')}">分类管理</a></li>
+                    <li><a href="{:U('Article/index')}">文章管理</a></li>
+                    <li><a href="{:U('Article/recover')}">回&nbsp;收&nbsp;站</a></li>
+                </ul>
+            </div>
+        </div>
+        <div style="clear:both;"></div>
+        <div class="box">
+            <div class="box_tit">
+                <em class="hopen"></em>
+                <h2>常用操作</h2>
+            </div>
+            <div class="box_list">
+                <ul>                   
+                    <li><a href="{:U('Link/index')}">友情链接</a></li>
+                    <li><a href="/clearcache.php">清除缓存</a></li> 
+                </ul>
+            </div>
+        </div>
+        <elseif condition="($menuTitle eq '扩展功能')"/>
+            <div class="box">
+                <div class="box_tit">
+                    <em class="hopen"></em>
+                    <h2>扩展功能</h2>
+                </div>
+                <div class="box_list">
+	                <ul>
+	                    <li><a href="{:U('Order/index')}">扩展功能</a></li>
+	                    <li><a href="{:U('Message/index')}">留言管理</a></li>	                   
+	                </ul>
+                </div>
+            </div>
+        <elseif condition="($menuTitle eq '手机APP')"/>
+       		<div class="box">
+                <div class="box_tit">
+                    <em class="hopen"></em>
+                    <h2>手机APP</h2>
+                </div>
+                <div class="box_list">
+	                <ul>
+	                    <li><a href="{:U('Order/index')}">手机APP1</a></li>
+	                    <li><a href="{:U('Message/index')}">手机APP2</a></li>	                   
+	                </ul>
+                </div>
+            </div>
+        <else />
+        <div class="box">
+            <div class="box_tit">
+                <em class="hopen"></em>
+                <h2>{$menuTitle}</h2>
+            </div>
+            <div class="box_list">
+                <ul>
+                <volist name="menu" id="item" >                   
+                	<li><a href="{:U($item['url'])}">{$item['title']}</a></li>                      
+                </volist>
+                </ul>
+            </div>
+            
+        </div>       
+        </if> 
+    </body>
+    <script type="text/javascript">
+	    $(function(){
+	        /*点击展开与收缩栏目*/
+	        $(".box_tit").click(function(){
+	            $(this).next().slideToggle();
+	            $(this).children("em").toggleClass("cur");
+	        });
+	        /*点击选择菜单*/
+	        $(".box_list li a").click(function(){
+	            $(".box_list li a").removeClass("on"); 
+	            $(this).addClass("on"); 
+	        })
+	    });   
+	</script>
+</html>

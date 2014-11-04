@@ -1,0 +1,29 @@
+<layout name="layout" />
+<div class="nav">
+	<p>内容管理  &gt; 回收站</span>
+</div>
+<div class="line"></div>
+
+<div style="margin-top:30px;">
+	<table width=90% style="margin:0 auto;" border=1 >
+		<tr>
+			<th>文章</th>
+			<th>分类</th>
+			<th>添加时间</th>
+			<th>排序</th>
+			<th>作者</th>
+			<th>操作</th>
+		</tr>
+			
+		<volist name='list' id='vo'>
+		<tr>
+			<td>{$vo.title} <volist name='vo.attr_name' id="attr_name">[{$attr_name}]</volist></td>
+			<td align=center>{$vo.column_id}</td>
+			<td align=center>{$vo.addtime|date="Y-m-d",###}</td>
+			<td align=center>{$vo.sort}</td>
+			<td align=center>{$vo.author}</td>
+			<td align=center><a href="{:U('Article/back',array('id'=>$vo['article_id']))}">还原</a> |　<a href="{:U('Article/del',array('id'=>$vo['article_id']))}">彻底删除</a></td>
+		</tr>
+		</volist>
+	</table>
+</div>

@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>库存管理系统</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
+    <base target="main" />
+<style>
+	*{padding:0; margin:0;}
+	body{background:#414859;color:#FFF;}
+	a{color:#FFF; text-decoration:none;}
+	.height50{ height:50px;}
+	.logo{width:167px;float:left;}
+	.info{float:right;height:30px;margin-top:20px;padding:0 10px;}
+	.info a{height:30px; line-height:30px; font-size:12px;}
+	.nav{float:left;}
+	.nav ul{height:auto; overflow:hidden; margin-top:20px;}
+	.nav li{float:left;list-style:none;}
+	.nav li span{ display:inline-block;padding:0 15px; height:30px; line-height:30px; }
+	.nav li span a{font-weight:bold;}
+	.cur{background:#FFF;}
+	.cur a{color:#000;}
+</style>
+</head>
+<body>     
+		<div class="logo height50">
+			<img src="__PUBLIC__/admin/images/logo_min.png" alt='管理后台LOGO'>
+		</div>  
+        <div class="info">
+        	<a href="__ROOT__/" target="_blank" class="textline">网站首页</a> /               
+	        <a href="{:U('Public/password')}" class="textline">个人中心</a> /
+	        <a href="{:U('Public/logout')}" class="textline" target="_top">退出登录</a>	        
+        </div>
+        <div class="nav height50">
+            <ul>
+                <li>
+                	<span>               		
+                			<a href="javascript:void(0);" onClick="sethighlight(0); parent.menu.location='{:U('Public/menu',array('title'=>'内容管理'))}'; parent.main.location='{:U('Public/main')}'; return false;">
+                				起始页
+                			</a>
+                		
+                	</span>
+                </li>
+                
+                <li><span><a href="javascript:void(0);" onClick="sethighlight(1); parent.menu.location='{:U('Public/menu',array('tag'=>1,'title'=>'模块管理'))}'; return false;">模块管理</a></span></li>
+                <li><span><a href="javascript:void(0);" onClick="sethighlight(2); parent.menu.location='{:U('Public/menu',array('tag'=>2,'title'=>'手机APP'))}'; return false;">手机App</a></span></li>
+                <li><span><a href="javascript:void(0);" onClick="sethighlight(3); parent.menu.location='{:U('Public/menu',array('tag'=>3,'title'=>'系统管理'))}'; return false;">系统管理</a></span></li>
+                <li><span><a href="javascript:void(0);" onClick="sethighlight(4); parent.menu.location='{:U('Public/menu',array('tag'=>4,'title'=>'扩展功能'))}'; parent.main.location='{:U('other/index')}'; return false;">扩展功能</a></span></li>
+            </ul>
+        </div>
+    
+<script type="text/javascript">
+    function sethighlight(n) {
+        var lis = document.getElementsByTagName('span');
+        for(var i = 0; i < lis.length; i++) {
+            lis[i].className = '';
+        }
+        lis[n].className = 'cur';
+    }
+    sethighlight(0);    
+</script> 
+</body>
+</html>

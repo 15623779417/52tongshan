@@ -1,0 +1,21 @@
+<layout name="layout" />
+<div class="nav">
+	<p>内容管理  &gt; 栏目管理   &gt; 添加分类 </p>
+<div class="line"></div>
+
+<div>
+	<form method="post">
+		分类名称：<input type='text' name="column_name"><br>
+		父级分类：
+		<select name="pid">
+			<option value="0">====根栏目====</option>
+			<volist name="options" id="vo">
+				<option value="{$vo.column_id}" >{$vo.html}{$vo.column_name}</option>
+			</volist>
+		</select><br>
+		排&nbsp;&nbsp;&nbsp;&nbsp;序：<input type='text' name="sort"><br>
+		状&nbsp;&nbsp;&nbsp;&nbsp;态：<input type='radio' name="status" value="1" checked>启用&nbsp;&nbsp;<input type='radio' name="status" value="0">禁用<br>
+		描&nbsp;&nbsp;&nbsp;&nbsp;述：<textarea name="column_des"></textarea><br>
+		<input type="submit" name="sub" value="保存">
+	</form>
+</div>

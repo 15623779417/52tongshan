@@ -1,0 +1,29 @@
+<layout name="layout" />
+<div class="nav">
+	<p>内容管理  &gt; 栏目管理   </p><span>[<a href="{:U('Column/add')}">添加分类</a>]</span>
+</div>
+<div class="line"></div>
+
+<div style="margin-top:30px;">
+	<table width=90% style="margin:0 auto;">
+		<tr>
+			<th>栏目名称</th>
+			<th>父级</th>
+			<th>添加时间</th>
+			<th>排序</th>
+			<th>状态</th>
+			<th>描述</th>
+		</tr>
+		
+		<volist name='list' id='vo'>
+		<tr>
+			<td>{$vo.html}{$vo.column_name}</td>
+			<td>{$vo.pid}</td>
+			<td>{$vo.addtime|date="Y-m-d",###}</td>
+			<td>{$vo.sort}</td>
+			<td><if condition="$vo.status eq 1">启用<else /> 禁用</if></td>
+			<td>{$vo.column_des}</td>
+		</tr>
+		</volist>
+	</table>
+</div>
