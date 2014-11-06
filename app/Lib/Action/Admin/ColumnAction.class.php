@@ -15,7 +15,7 @@ class ColumnAction extends Action
 	{
 		
 		$list = M('Column')->select();
-		$list = $this->format($list);
+		$list = format($list,'column_id');
 		$this->assign('list',$list);
 		$this->display();
 	}
@@ -51,33 +51,12 @@ class ColumnAction extends Action
 		else
 		{
 			$options = $_column_mod->field('column_id,column_name,pid')->select();
-			$options = $this->format($options);
+			$options = format($options,'column_id');
 			$this->assign('options',$options);
 			$this->display();
 		} 
 		
 	}
-	/**
-	 * 
-	 * 无限极分类
-	 * @param array $arr 二维数组
-	 * @param atring type $pid 父级ID
-	 * retuen array 二维数组
-	 */
-	function format($arr,$pid=0,$level=0,$html='__')
-	{	
-		$options = array();
-		foreach ($arr as $val)
-		{
-			if ($val['pid'] == $pid )
-			{
-				$val['level'] = $level;
-				if ($level) $val['html'] = '|'.str_repeat($html,$level);
-				$options[] = $val; 
-				$options = array_merge($options,$this->format($arr,$val['column_id'],$level+1,$html));
-			}
-		}
-		return $options;
-	}
+
 }
 ?>

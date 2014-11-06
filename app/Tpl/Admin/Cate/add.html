@@ -1,7 +1,7 @@
 <layout name="layout" />
 
 <div class="nav">
-	<p>商品管理  &gt; 品牌管理   &gt; 添加品牌 </p>	
+	<p>商品管理  &gt; 分类管理   &gt; 添加分类</p>	
 </div>
 <div class="line" style="margin-bottom:25px;"></div>
 
@@ -9,19 +9,35 @@
 	<form method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
 	
 		<div class="form-group">
-			<label class="col-xs-2 text-right">品牌：</label>
-			<div class="col-xs-2"><input type='text' name="brand_name" class="form-control input-sm"></div>
+			<label class="col-xs-2 text-right">分类：</label>
+			<div class="col-xs-2"><input type='text' name="cate_name" class="form-control input-sm"></div>
 		</div>		
 		
 		<div class="form-group">
     		<label class="col-xs-2 text-right">图标：</label>
     		<div class="col-sm-2">      			
-      			<input type="file" name="logo">   
+      			<input type="file" name="thumb_img">   
     		</div>
     		<div class="col-sm-6">
     			(建议上传 200 * 100 图片)
     		</div>
   		</div>  		  		
+  		
+  		<div class="form-group">
+    		<label class="col-xs-2 text-right">父级：</label>
+    		<div class="col-xs-2">      			
+      			<select class="form-control input-sm" name="pid">
+      				<option value="0_0">========根分类========</option>      				
+      				<volist name="cate" id="vo">
+					<option value="{$vo.level}_{$vo.cate_id}" <if condition='$vo.level gt 2 '> disabled </if> >{$vo.html}{$vo.cate_name}</option>
+					</volist>
+					</optgroup>
+				</select>
+    		</div>
+    		<div class="col-sm-6">
+    			(第三级的分类为最低分类，不可被选择)
+    		</div>
+  		</div>
   		
   		<div class="form-group">
   			<label class="col-xs-2 text-right">状态：</label>
@@ -32,9 +48,17 @@
   		</div>			
 		
 		<div class="form-group">
-			<label class="col-xs-2 text-right">备注：</label>
+			<label class="col-xs-2 text-right">关键词：</label>
+			<div class="col-xs-3"> 
+				<input type="text" class="form-control input-sm" name="keys">
+			</div>
+			<div class="col-xs-3">(关键词之间用英文‘,’逗号隔开)</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-xs-2 text-right">描述：</label>
 			<div class="col-xs-4"> 
-				<textarea class="form-control" rows="2" name="mark"></textarea>
+				<textarea class="form-control" rows="2" name="short_des"></textarea>
 			</div>
 		</div>
 		

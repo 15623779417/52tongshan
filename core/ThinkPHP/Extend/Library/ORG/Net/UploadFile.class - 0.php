@@ -45,7 +45,6 @@ class UploadFile {//类定义开始
         'uploadReplace'     =>  false,// 存在同名是否覆盖
         'saveRule'          =>  'uniqid',// 上传文件命名规则
         'hashType'          =>  'md5_file',// 上传文件Hash规则函数名
-    	'isDefinedName'     =>  '',		//自定义上传的文件名 空表示不自定义，而是根据saveRule的命名规则，否则按照自己定义的规则
         );
 
     // 错误信息
@@ -89,9 +88,7 @@ class UploadFile {//类定义开始
      * @return string
      */
     private function save($file) {
-
-    	$filename = $file['savepath'].$file['savename'];
-    	
+        $filename = $file['savepath'].$file['savename'];
         if(!$this->uploadReplace && is_file($filename)) {
             // 不覆盖同名文件
             $this->error	=	'文件已经存在！'.$filename;
@@ -119,27 +116,6 @@ class UploadFile {//类定义开始
                 $thumbSuffix    =   explode(',',$this->thumbSuffix);
                 $thumbFile		=	explode(',',$this->thumbFile);
                 $thumbPath      =   $this->thumbPath?$this->thumbPath:dirname($filename).'/';
-                
-               //创建可写权限的 目录  Added2014/11/06
-	            if(!is_dir($thumbPath)) 
-	            {
-	                // 尝试创建目录
-	                if(!mkdir($thumbPath))
-	                {
-	                    $this->error  =  '上传目录'.$thumbPath.'不存在';
-	                    return false;
-	                }
-		        }
-		        else 
-		        {
-		            if(!is_writeable($thumbPath)) 
-		            {
-		                $this->error  =  '上传目录'.$thumbPath.'不可写';
-		                return false;
-		            }
-		        }
-                
-                
                 $thumbExt       =   $this->thumbExt ? $this->thumbExt : $file['extension']; //自定义缩略图扩展名
                 // 生成图像缩略图
                 import($this->imageClassPath);
@@ -372,30 +348,23 @@ class UploadFile {//类定义开始
      * @return string
      */
     private function getSaveName($filename) {
-    	
-    	if($this->isDefinedName){
-    		$saveName = $this->isDefinedName.".".$filename['extension'];
-    	}
-    	else
-    	{
-	    	$rule = $this->saveRule;
-	        if(empty($rule)) {//没有定义命名规则，则保持文件名不变
-	            $saveName = $filename['name'];
-	        }else {
-	            if(function_exists($rule)) {
-	                //使用函数生成一个唯一文件标识号
-	                $saveName = $rule().".".$filename['extension'];
-	            }else {
-	                //使用给定的文件名作为标识号
-	                $saveName = $rule.".".$filename['extension'];
-	            }
-	        }
-	        if($this->autoSub) {
-	            // 使用子目录保存文件
-	            $filename['savename'] = $saveName;
-	            $saveName = $this->getSubName($filename).$saveName;
-	        }
-    	} 	        
+        $rule = $this->saveRule;
+        if(empty($rule)) {//没有定义命名规则，则保持文件名不变
+            $saveName = $filename['name'];
+        }else {
+            if(function_exists($rule)) {
+                //使用函数生成一个唯一文件标识号
+                $saveName = $rule().".".$filename['extension'];
+            }else {
+                //使用给定的文件名作为标识号
+                $saveName = $rule.".".$filename['extension'];
+            }
+        }
+        if($this->autoSub) {
+            // 使用子目录保存文件
+            $filename['savename'] = $saveName;
+            $saveName = $this->getSubName($filename).$saveName;
+        }
         return $saveName;
     }
 

@@ -18,5 +18,7 @@ return array(
 	//独立分组
 	'APP_GROUP_LIST'  =>'home,admin',
 	'DEFAULT_GROUP'   =>'home',
+	
+	'WebUrl' => 'http://tp23.local',   //这里不加最后面的斜线     为以后做图片服务器准备
 );
 ?>

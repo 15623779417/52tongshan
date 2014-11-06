@@ -14,6 +14,11 @@ class BrandAction extends SimpleAction{
 		$this->display();
 	}
 	
+	
+	/**
+	 * 
+	 * 添加品牌
+	 */
 	function add()
 	{
 		if($this->isPost())
@@ -31,12 +36,16 @@ class BrandAction extends SimpleAction{
 			else
 			{
 				//更新品牌LOGO
-				if($_FILES['logo']['error']==0){
-					$savePath = "/upload/brand/".$id."/";  //设置上传的目录
-					$info = upload($savePath);
+				if($_FILES['logo']['error']==0)
+				{
+					$savePath = "/upload/brand/";  //设置上传的目录
+					
+					$info = upload($savePath,$id);
+					
+					//pr($info);
 					if($info['success'])
 					{					
-						$logo = $savePath.$info['success'][0]['savename'];
+						$logo = $savePath."small/s_".$info['success'][0]['savename'];
 					}
 					else 
 					{
@@ -54,7 +63,7 @@ class BrandAction extends SimpleAction{
 				else
 				{
 					$data[$this->_model->getPk()] = $id;
-					$data['logo'] = $logo;
+				
 					//log_db($this->_user['id'], $this->_model->getTableName(), 'insert', '', $data);				
 					$this->_after_add($data);
 					$this->assign('jumpUrl', __URL__. '/index');  //页面跳转
@@ -79,23 +88,5 @@ class BrandAction extends SimpleAction{
 	function _model()
 	{
 		$this->_model = D('GBrand');
-	}
-	
-	
-	/**
-	 * 
-	 * 文件上传
-	 */
-	function upload($savePath="/upload/"){
-		import('ORG.Net.UploadFile');
-		$upload = new UploadFile();	// 实例化上传类
-		$upload->maxSize  = 3145728 ;	// 设置附件上传大小
-		$upload->allowExts  = array('jpg', 'gif', 'png', 'jpeg');	// 设置附件上传类型
-		$upload->savePath = ".".$savePath;	// 设置附件上传目录
-		if(!$upload->upload()) {	// 上传错误提示错误信息
-			$this->error($upload->getErrorMsg());
-		}else{	// 上传成功 获取上传文件信息
-		 	return 	$info =  $upload->getUploadFileInfo();
-		}
 	}
 }?>

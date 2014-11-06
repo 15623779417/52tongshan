@@ -41,7 +41,7 @@ class ArticleAction extends Action{
 	{
 		if(!$_POST)
 		{
-			$this->assign('column',$this->format($this->get_column())); //分类
+			$this->assign('column',format($this->get_column(),'column_id')); //分类
 			$this->assign('attr',$this->get_attr()); 					//文章属性	
 			$this->display();	
 		}
@@ -61,10 +61,20 @@ class ArticleAction extends Action{
 			
 			
 			//更新缩略图
-			if($_FILES['short_img']['error']==0){
+			if($_FILES['short_img']['error']==0)
+			{
 				$savePath = "/upload/image/".date("Ymd")."/";  //设置上传的目录
-				$info = $this->upload($savePath);
-				$article_data['short_img'] = $savePath.$info[0]['savename'];
+				
+				$info = upload($savePath);
+				
+				if($info['success'])
+				{					
+					$article_data['short_img'] = $savePath.$info['success'][0]['savename'];
+				}
+				else 
+				{
+					pr($info['error']);
+				}
 			}
 			
 			if ($article_id = M('Article')->add($article_data))
@@ -145,7 +155,7 @@ class ArticleAction extends Action{
 			$info = M('Article')->find($id);
 			$this->assign('info',$info);			
 			$this->assign('attr',$this->get_attr($id));
-			$this->assign('column',$this->format($this->get_column()));
+			$this->assign('column',format($this->get_column(),'column_id'));
 			$this->display();
 		}
 		else 
@@ -164,10 +174,20 @@ class ArticleAction extends Action{
 			);
 			
 			//更新缩略图
-			if($_FILES['short_img']['error']==0){
+			if($_FILES['short_img']['error']==0)
+			{
 				$savePath = "/upload/image/".date("Ymd")."/";  //设置上传的目录
-				$info = $this->upload($savePath);
-				$article_data['short_img'] = $savePath.$info[0]['savename'];
+				
+				$info = upload($savePath);
+				
+				if($info['success'])
+				{					
+					$article_data['short_img'] = $savePath.$info['success'][0]['savename'];
+				}
+				else 
+				{
+					pr($info['error']);
+				}
 			}
 			
 			if (M('Article')->save($article_data))
@@ -206,23 +226,6 @@ class ArticleAction extends Action{
 		}
 	}
 	
-	
-	/**
-	 * 
-	 * 文件上传
-	 */
-	function upload($savePath="/upload/"){
-		import('ORG.Net.UploadFile');
-		$upload = new UploadFile();	// 实例化上传类
-		$upload->maxSize  = 3145728 ;	// 设置附件上传大小
-		$upload->allowExts  = array('jpg', 'gif', 'png', 'jpeg');	// 设置附件上传类型
-		$upload->savePath = ".".$savePath;	// 设置附件上传目录
-		if(!$upload->upload()) {	// 上传错误提示错误信息
-			$this->error($upload->getErrorMsg());
-		}else{	// 上传成功 获取上传文件信息
-		 	return 	$info =  $upload->getUploadFileInfo();
-		}
-	}
 	
 	/**
 	 * 
@@ -285,30 +288,7 @@ class ArticleAction extends Action{
 			$this->error('删除失败！');
 		}
 	}
-	
-	
-	/**
-	 * 
-	 * 无限极分类
-	 * @param array $arr 二维数组
-	 * @param atring type $pid 父级ID
-	 * retuen array 二维数组
-	 */
-	function format($arr,$pid=0,$level=0,$html='__')
-	{	
-		$options = array();
-		foreach ($arr as $val)
-		{
-			if ($val['pid'] == $pid )
-			{
-				$val['level'] = $level;
-				if ($level) $val['html'] = '|'.str_repeat($html,$level);
-				$options[] = $val; 
-				$options = array_merge($options,$this->format($arr,$val['column_id'],$level+1,$html));
-			}
-		}
-		return $options;
-	}
+
 	
 	/**
 	 * 
