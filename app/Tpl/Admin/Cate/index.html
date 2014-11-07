@@ -16,11 +16,11 @@
 		</tr>		
 		<volist name='list' id='vo'>
 		<tr>
-			<td>{$vo.brand_name}</td>
-			<td><img src="{:C('WebUrl')}{$vo.logo}" style="height:50px; width:50px;"/></td>
+			<td>{$vo.cate_name}</td>
+			<td><img src="{:C('WebUrl')}{$vo.thumb_img}" style="height:50px; width:50px;"/></td>
 			<td>{$vo.status}</td>
 			<td>{$vo.sort}</td>
-			<td>{$vo.mark}</td>
+			<td>{$vo.short_des}</td>
 			<td><a href="{:U('Article/edit',array('id'=>$vo['article_id']))}">编辑</a> |　<a href="{:U('Article/addRecover',array('id'=>$vo['article_id']))}">删除</a></td>
 		</tr>
 		</volist>

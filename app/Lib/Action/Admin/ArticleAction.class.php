@@ -69,7 +69,7 @@ class ArticleAction extends Action{
 				
 				if($info['success'])
 				{					
-					$article_data['short_img'] = $savePath.$info['success'][0]['savename'];
+					$article_data['short_img'] = $savePath.'small/s_'.$info['success'][0]['savename'];
 				}
 				else 
 				{
@@ -182,7 +182,7 @@ class ArticleAction extends Action{
 				
 				if($info['success'])
 				{					
-					$article_data['short_img'] = $savePath.$info['success'][0]['savename'];
+					$article_data['short_img'] = $savePath.'small/s_'.$info['success'][0]['savename'];
 				}
 				else 
 				{

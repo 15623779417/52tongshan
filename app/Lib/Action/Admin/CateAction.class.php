@@ -19,6 +19,12 @@ class CateAction extends SimpleAction{
 		$this->_model = D('GCate');
 	}
 	
+	function index(){
+		$list = $this->_model->select();
+		$this->assign('list',$list);
+		$this->display();
+	}
+	
 	/**
 	 * 添加分类
 	 * 
