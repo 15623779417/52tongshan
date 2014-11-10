@@ -20,5 +20,10 @@ return array(
 	'DEFAULT_GROUP'   =>'home',
 	
 	'WebUrl' => 'http://tp23.local',   //这里不加最后面的斜线     为以后做图片服务器准备
+	
+	//自定义标签
+	'TAGLIB_LOAD'=> true,
+	'APP_AUTOLOAD_PATH'         =>'@.TagLib',
+	'TAGLIB_BUILD_IN'           =>'Cx,Lists',
 );
 ?>

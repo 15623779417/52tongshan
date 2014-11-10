@@ -16,7 +16,8 @@ class ArticleAction extends Action
 		if(!($id = $_REQUEST['id'])) $this->error('非法操作！');
 		$article_mod = D('Article');
 		$list = $article_mod->where(array('status'=>0,'article_id'=>$id))->find();
-		print_r($list);
+		$this->assign('list',$list);
+		$this->display();
 	}
 }
 ?>

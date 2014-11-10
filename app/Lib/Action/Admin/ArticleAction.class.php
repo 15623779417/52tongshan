@@ -28,9 +28,20 @@ class ArticleAction extends Action{
 				$attr[] = $attr_mod->where(array('attr_id'=>$v))->getField('attr_name');
 			}
 			$list[$key]['attr_name'] = $attr ;
-		}	
+			$list[$key]['column_name'] = $this->get_column_name($val['column_id']);
+		}
 		$this->assign('list',$list);		
 		$this->display();
+	}
+	
+	/**
+	 * 
+	 * 根据 分类的ID 得到分类名
+	 */
+	function get_column_name($column_id)
+	{
+		$column_mod = M('Column');
+		return $column_name = $column_mod->where(array("column_id"=>$column_id))->getField('column_name');
 	}
 	
 	/**
