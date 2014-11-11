@@ -11,7 +11,7 @@
 		<div class="form-group">
 			<label class="col-xs-2 text-right">名称：</label>
 			<div class="col-xs-3"><input type='text' name="good_name" class="form-control input-sm"></div>
-			<div class="col-xs-1"><input type='text' name="name_style" class="form-control input-sm" placeholder="#000000"></div>
+			<div class="col-xs-2"><input type='text' name="name_style" class="form-control input-sm" placeholder="#000000"></div>
 		</div>		
 		
 		<div class="form-group">
@@ -24,7 +24,7 @@
   		<div class="form-group">
     		<label class="col-xs-2 text-right">品牌：</label>
     		<div class="col-xs-2">      			
-      			<select class="form-control input-sm" name="column_id">
+      			<select class="form-control input-sm" name="brand_id">
       				<option value="0">======请选择品牌======</option>
       				<volist name="brand_list" id="vo">
 					<option value="{$vo.brand_id}" >{$vo.brand_name}</option>
@@ -59,7 +59,7 @@
 		<div class="form-group">
 			<label class="col-xs-2 text-right">描述：</label>
 			<div class="col-xs-10"> 
-				<textarea class="form-control" rows="2" name="short_des"></textarea>
+				<textarea class="form-control" rows="2" name="short_desc"></textarea>
 			</div>
 		</div>
 		
