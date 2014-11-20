@@ -7,21 +7,21 @@
 <div style="margin-top:30px;">
 	<table width=90% style="margin:0 auto;" border=1 >
 		<tr>
-			<th>名称</th>
-			<th>分类</th>
+			<th>商品</th>
+			<th>品牌</th>
 			<th>添加时间</th>
 			<th>排序</th>
-			<th>作者</th>
+			<th>状态</th>
 			<th>操作</th>
 		</tr>
 			
 		<volist name='list' id='vo'>
 		<tr>
-			<td><a href="/index.php/Article/index/id/{$vo.article_id}.html" style="text-decoration:none;" target="_blank">{$vo.good_name} <volist name='vo.attr_name' id="attr_name">[{$attr_name}]</volist></a></td>
 			<td align=center>{$vo.good_name}</td>
+			<td align=center>{$vo.brand_id}</td>
 			<td align=center>{$vo.add_time|date="Y-m-d",###}</td>
 			<td align=center>{$vo.sort}</td>
-			<td align=center>{$vo.author}</td>
+			<td align=center>{$vo.status}</td>
 			<td align=center><a href="{:U('Article/edit',array('id'=>$vo['article_id']))}">编辑</a> |　<a href="{:U('Article/addRecover',array('id'=>$vo['article_id']))}">删除</a></td>
 		</tr>
 		</volist>
